@@ -291,7 +291,7 @@ fn bytes_to_string(bytes : Array[Byte]) -> Result[String, String] {
     if code > 127 {
       return Err("Non-ASCII character found")
     }
-    result = result + Char::from_int(code).to_string()
+    result = result + Int::unsafe_to_char(code).to_string()
   }
   Ok(result)
 }
