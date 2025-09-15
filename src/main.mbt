@@ -1,4 +1,5 @@
-///| Complete DER (Distinguished Encoding Rules) Library for MoonBit
+///|
+/// Complete DER (Distinguished Encoding Rules) Library for MoonBit
 /// Implements ASN.1 DER encoding and decoding with comprehensive type support
 
 // Object Identifier structure
