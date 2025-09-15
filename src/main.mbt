@@ -105,7 +105,6 @@ pub enum DerError {
   InvalidTag(Int)
   InvalidLength(Int)
   InsufficientData
-  InvalidFormat(String)
   InvalidOid(String)
   InvalidBitString(String)
   InvalidStringEncoding(String)
