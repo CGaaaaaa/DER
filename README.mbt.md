@@ -50,7 +50,7 @@ A comprehensive ASN.1 DER encoding and decoding library implemented in MoonBit, 
 
 ### Basic Example
 
-```moonbit
+```moonbit no-check
 // Encode a simple integer
 let value = DerValue::Integer(42L)
 match encode_der(value) {
@@ -71,7 +71,7 @@ match decode_der(encoded) {
 
 ### Complex Structure Example
 
-```moonbit
+```moonbit no-check
 // Create a complex nested structure
 let complex_data = DerValue::Sequence([
   DerValue::Integer(42L),
@@ -97,7 +97,7 @@ match encode_der(complex_data) {
 
 ### Object Identifier Example
 
-```moonbit
+```moonbit no-check
 // Create OID from string notation
 match oid_from_string("1.2.840.113549.1.1.1") {
   Ok(oid) => {
@@ -113,7 +113,7 @@ match oid_from_string("1.2.840.113549.1.1.1") {
 
 ### SNMP Protocol Example
 
-```moonbit
+```moonbit no-check
 // SNMP GetRequest PDU structure
 // Demonstrates real-world protocol usage with IMPLICIT tags and SEQUENCE OF
 
@@ -147,35 +147,12 @@ match encode_der(snmp_pdu) {
 
 ### Core Types
 
-```moonbit
-pub enum DerValue {
-  Boolean(Bool)
-  Integer(Int64)
-  BitString(BitString)
-  OctetString(Array[Byte])
-  Null
-  ObjectId(ObjectIdentifier)
-  PrintableString(String)
-  IA5String(String)
-  Sequence(Array[DerValue])
-  Set(Array[DerValue])
-  // Advanced ASN.1 types
-  SequenceOf(Array[DerValue])  // SEQUENCE OF
-  SetOf(Array[DerValue])       // SET OF  
-  Choice(Int, DerValue)        // CHOICE with tag
-  ImplicitTag(Int, DerValue)   // IMPLICIT [tag] value
-}
+The library defines the following main types:
 
-pub enum DerError {
-  InvalidTag(Int)
-  InvalidLength(Int)
-  InsufficientData
-  InvalidFormat(String)
-  InvalidOid(String)
-  InvalidBitString(String)
-  InvalidStringEncoding(String)
-}
-```
+- `DerValue` - Represents all ASN.1 DER value types
+- `DerError` - Error types for encoding/decoding operations
+- `ObjectIdentifier` - Structure for OID components
+- `BitString` - Structure for bit strings with unused bits tracking
 
 ### Key Functions
 

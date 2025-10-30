@@ -1,0 +1,71 @@
+// Generated package interface file for moonbit/der
+
+// Object Identifier structure
+pub struct ObjectIdentifier {
+  components : Array[Int]
+}
+
+pub fn oid_new(components : Array[Int]) -> ObjectIdentifier
+
+pub fn oid_from_string(oid_str : String) -> Result[ObjectIdentifier, String]
+
+pub fn oid_to_string(oid : ObjectIdentifier) -> String
+
+// Bit String structure
+pub struct BitString {
+  data : Array[Byte]
+  unused_bits : Int
+}
+
+pub fn bitstring_new(data : Array[Byte], unused_bits : Int) -> BitString
+
+// DER Value types
+pub enum DerValue {
+  Boolean(Bool)
+  Integer(Int64)
+  BitString(BitString)
+  OctetString(Array[Byte])
+  Null
+  ObjectId(ObjectIdentifier)
+  PrintableString(String)
+  IA5String(String)
+  Sequence(Array[DerValue])
+  Set(Array[DerValue])
+  SequenceOf(Array[DerValue])
+  SetOf(Array[DerValue])
+  Choice(Int, DerValue)
+  ImplicitTag(Int, DerValue)
+}
+
+// Error types
+pub enum DerError {
+  InvalidTag(Int)
+  InvalidLength(Int)
+  InsufficientData
+  InvalidOid(String)
+  InvalidBitString(String)
+  InvalidStringEncoding(String)
+}
+
+// Encode/Decode functions
+pub fn encode_length(length : Int) -> Array[Byte]
+
+pub fn decode_length(
+  data : Array[Byte],
+  offset : Int
+) -> Result[(Int, Int), DerError]
+
+pub fn encode_der(value : DerValue) -> Result[Array[Byte], DerError]
+
+pub fn decode_der(data : Array[Byte]) -> Result[DerValue, DerError]
+
+pub fn decode_der_at(
+  data : Array[Byte],
+  offset : Int
+) -> (Result[DerValue, DerError], Int)
+
+// Utility functions
+pub fn bytes_to_hex(bytes : Array[Byte]) -> String
+
+pub fn pretty_print(value : DerValue) -> String
+
